@@ -3,6 +3,7 @@ package com.deitel.weatherviewer;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -38,7 +39,7 @@ public class Weather {
 
         calendar.add(Calendar.MILLISECOND, tz.getOffset(calendar.getTimeInMillis()));
 
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("EEEE HH:mm", Locale.UK);
         return dateFormatter.format(calendar.getTime());
     }
 }

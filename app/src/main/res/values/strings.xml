@@ -2,7 +2,7 @@
     <string name="app_name">WeatherViewer</string>
     <string name="action_settings">Settings</string>
     <string name="api_key">71ebbb3ce82ccda9465b9cd69aa0f25f</string>
-    <string name="web_service_url">http://api.openweathermap.org/data/2.5/forecast/daily?q=</string>
+    <string name="web_service_url">http://api.openweathermap.org/data/2.5/forecast?q=</string>
     <string name="invalid_url">Invalid URL</string>
     <string name="weather_condition_image">Graphical representation of weather conditions</string>
     <string name="high_temp">Highest: %s</string>

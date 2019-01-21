@@ -84,8 +84,64 @@ public class WeatherArrayAdapter extends ArrayAdapter<Weather>{
         viewHolder.dayTextView.setText(context.getString(R.string.day_description, day.dayOfWeek, day.description));
         viewHolder.lowTextView.setText(context.getString(R.string.low_temp, day.minTemp));
         viewHolder.hiTextView.setText(context.getString(R.string.high_temp, day.maxTemp));
-        viewHolder.humidityTextView.setText(context.getString(R.string.humidity, day. humidity));
+        viewHolder.humidityTextView.setText(context.getString(R.string.humidity, day.humidity));
 
         return convertView; // return a complete list of elements to display
+    }
+
+    @Override
+    public int getCount() {
+        int count = super.getCount();
+        return count;
+    }
+
+    // AsyncTask subclass loading the icon depicting weather conditions using a separate thread.
+    private class LoadImageTask extends AsyncTask<String, Void, Bitmap> {
+        private ImageView imageView;    // displays icon
+
+        // hold the ImageView object where the downloaded bitmap should be displayed
+        public LoadImageTask(ImageView imageView) {
+            this.imageView = imageView;
+        }
+
+        // load the image; params[0] should be a string containing the URL address of the image
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            Bitmap bitmap = null;
+            HttpURLConnection connection = null;
+
+            // open HttpURLConnection, gain access to the InputStream stream and download the image
+            try {
+                URL url = new URL(params[0]);
+
+                connection = (HttpURLConnection) url.openConnection();
+
+                try (InputStream inputStream = connection.getInputStream()) {
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                    bitmaps.put(params[0], bitmap); // save in cache
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+
+            return bitmap;
+        }
+
+        // attach image to the list element
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            imageView.setImageBitmap(bitmap);
+        }
+
     }
 }

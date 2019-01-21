@@ -9,14 +9,10 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-
     <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/locationEditText"
@@ -25,4 +21,10 @@
             android:hint="@string/hint_text"
             android:singleLine="true" />
     </android.support.design.widget.TextInputLayout>
+
+    <ListView
+        android:id="@+id/weatherListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 </LinearLayout>
